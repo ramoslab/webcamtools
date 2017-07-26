@@ -5,12 +5,22 @@ import subprocess as sub
 import socket
 import time
 
+import sys
+sys.path.append('/home/tecnalia/code/ismore/')
+
+import machine_settings as settings
+
+video_ip = settings.ip_video()
+video_port = 22
+video_user = 'tecnalia'
+video_pw = 'tecnalia'
+
 # Definitions of functions that start shell scripts
 def connect_ssh():
     print("Connecting to the PISA PC")
     client = paramiko.SSHClient()
     client.load_system_host_keys()
-    client.connect('192.168.137.4',22,'tecnalia','tecnalia')
+    client.connect(video_ip,video_port,video_user,video_pw)
     return client
 
 def disconnect_ssh(client):
